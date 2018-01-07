@@ -21,14 +21,11 @@ export class AppComponent {
           return {
             ...result,
             summary:
-              result.summary.length > 40
-                ? result.summary.slice(0, 40) + '...'
+              result.summary.length > 100
+                ? result.summary.slice(0, 100) + '...'
                 : result.summary
           }
         })
-      })
-      .do(e => {
-        console.log(e)
       })
       .startWith([])
   }

@@ -19,11 +19,13 @@
     <tbody nz-tbody>
       <tr nz-tbody-tr *ngFor="let data of nzTable.data" nz-row>
         <td nz-td nz-col [nzSpan]="6">
-          <a [href]="data.url" target="_blank">{{data.title}}</a>
+          <a [href]="data.url" target="_blank" [title]="data.title">{{data.title}}</a>
         </td>
-        <td nz-td nz-col [nzSpan]="12">{{data.summary}}</td>
+        <td nz-td nz-col [nzSpan]="12" [title]="data.summary">
+          {{data.summary}}
+        </td>
         <td nz-td nz-col [nzSpan]="3">{{data.source}}</td>
-        <td nz-td nz-col [nzSpan]="3">{{data.createdAt}}</td>
+        <td nz-td nz-col [nzSpan]="3">{{data.createdAt | moment}}</td>
       </tr>
     </tbody>
   </nz-table>

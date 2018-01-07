@@ -1,3 +1,9 @@
 .app-container {
   padding: 20px 30px;
 }
+
+[nz-td] {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
