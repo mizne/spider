@@ -14,6 +14,9 @@ export class NewsService {
       headers: {
         'X-LC-Id': APP_ID,
         'X-LC-Key': APP_KEY
+      },
+      params: {
+        order: '-createdAt'
       }
     })
   }
