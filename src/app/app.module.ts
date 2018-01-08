@@ -14,11 +14,12 @@ import { TokenInterceptor } from '../services/interceptor'
 import { MomentPipe } from '../pipes/moment.pipe'
 
 import { AppComponent } from './app.component'
+import { LoadingComponent } from './components/loading.component'
 import { reducers } from './reducers/index'
 import { ArticleEffects } from './effects/app.effects'
 
 @NgModule({
-  declarations: [AppComponent, MomentPipe],
+  declarations: [AppComponent, MomentPipe, LoadingComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
