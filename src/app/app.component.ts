@@ -7,7 +7,8 @@ import {
   State,
   getArticles,
   getArticleTotalCount,
-  hasMoreArticle
+  hasMoreArticle,
+  getFetchMoreLoading,
 } from './reducers'
 import { ArticleService } from '../services/article.service'
 import { DestroyService } from '../services/destroy.service'
@@ -27,6 +28,7 @@ import {
 export class AppComponent implements OnInit {
   news$: Observable<Article[]>
   hasMoreArticle$: Observable<boolean>
+  loading$: Observable<boolean>
 
   toFetchMoreSub: Subject<void> = new Subject<void>()
   constructor(
@@ -42,13 +44,13 @@ export class AppComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('scrolled!')
     this.toFetchMoreSub.next()
   }
 
   private initDataSource() {
     this.news$ = this.store.select(getArticles)
     this.hasMoreArticle$ = this.store.select(hasMoreArticle)
+    this.loading$ = this.store.select(getFetchMoreLoading)
   }
 
   private initDispatch() {

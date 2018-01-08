@@ -15,4 +15,8 @@
   </div>
 </div>
 
+<div class="loading" *ngIf="loading$ | async">
+    <img src="../assets/images/ninja.gif" alt="">
+  </div>
+
 <p *ngIf="!(hasMoreArticle$ | async)" class="no-data">我也是有底线的。</p>

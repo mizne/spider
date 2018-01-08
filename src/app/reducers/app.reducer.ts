@@ -8,11 +8,15 @@ const uniqWithUrl = uniqWith(eqByUrl)
 export interface State {
   articles: Article[]
   articleTotalCount: number
+
+  fetchMoreLoading: boolean
 }
 
 const initialState: State = {
   articles: [],
-  articleTotalCount: 0
+  articleTotalCount: 0,
+
+  fetchMoreLoading: false
 }
 
 export function reducer(
@@ -26,13 +30,24 @@ export function reducer(
         articles: action.payload.results,
         articleTotalCount: action.payload.count
       }
+    case fromApp.FETCH_MORE_ARTICLES:
+      return {
+        ...state,
+        fetchMoreLoading: true
+      }
     case fromApp.FETCH_MORE_ARTICLES_SUCCESS:
       return {
         ...state,
         articles: uniqWithUrl(
           state.articles.concat(action.payload.results)
         ) as Article[],
-        articleTotalCount: action.payload.count
+        articleTotalCount: action.payload.count,
+        fetchMoreLoading: false
+      }
+    case fromApp.FETCH_MORE_ARTICLES_FAILURE:
+      return {
+        ...state,
+        fetchMoreLoading: false
       }
     default:
       return state
@@ -47,3 +62,4 @@ export const getSkipAndLimit = (state: State) => ({
 })
 export const hasMoreArticle = (state: State) =>
   state.articleTotalCount > state.articles.length
+export const getFetchMoreLoading = (state: State) => state.fetchMoreLoading

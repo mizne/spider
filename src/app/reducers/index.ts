@@ -23,3 +23,7 @@ export const hasMoreArticle = createSelector(
   getAppState,
   fromApp.hasMoreArticle
 )
+export const getFetchMoreLoading = createSelector(
+  getAppState,
+  fromApp.getFetchMoreLoading
+)
