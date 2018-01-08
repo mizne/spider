@@ -1,6 +1,6 @@
 <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
 
-  <div *ngFor="let item of news" class="article-item">
+  <div *ngFor="let item of news$ | async" class="article-item">
     <nz-card>
       <ng-template #title>
         {{item.title}}
@@ -13,5 +13,6 @@
       </ng-template>
     </nz-card>
   </div>
-
 </div>
+
+<p *ngIf="!(hasMoreArticle$ | async)" class="no-data">我也是有底线的。</p>

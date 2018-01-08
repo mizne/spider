@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/do'
-import 'rxjs/add/operator/startWith'
-import 'rxjs/add/operator/takeUntil'
+import { Subject } from 'rxjs/Subject'
 
-import { NewsService } from '../services/news.service'
+import { Store } from '@ngrx/store'
+import {
+  State,
+  getArticles,
+  getArticleTotalCount,
+  hasMoreArticle
+} from './reducers'
+import { ArticleService } from '../services/article.service'
 import { DestroyService } from '../services/destroy.service'
-import { News } from '../models/news.model'
+import { Article } from '../models/article.model'
+
+import {
+  FetchArticlesAction,
+  FetchMoreArticlesAction
+} from './actions/app.action'
 
 @Component({
   selector: 'app-root',
@@ -16,30 +25,47 @@ import { News } from '../models/news.model'
   providers: [DestroyService]
 })
 export class AppComponent implements OnInit {
-  news$: Observable<any[]>
-  news: News[] = []
+  news$: Observable<Article[]>
+  hasMoreArticle$: Observable<boolean>
+
+  toFetchMoreSub: Subject<void> = new Subject<void>()
   constructor(
-    private newsService: NewsService,
-    private destroyService: DestroyService
+    private newsService: ArticleService,
+    private destroyService: DestroyService,
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
-    this.fetchNews()
+    this.initDataSource()
+    this.initDispatch()
+    this.initSubscriber()
   }
 
   onScroll() {
     console.log('scrolled!')
-    this.fetchMoreNews()
+    this.toFetchMoreSub.next()
   }
 
-  private fetchNews() {
-    this.newsService
-      .fetchNews()
+  private initDataSource() {
+    this.news$ = this.store.select(getArticles)
+    this.hasMoreArticle$ = this.store.select(hasMoreArticle)
+  }
+
+  private initDispatch() {
+    this.store.dispatch(new FetchArticlesAction())
+  }
+
+  private initSubscriber() {
+    this.toFetchMoreSub
+      .asObservable()
+      .withLatestFrom(
+        this.store.select(hasMoreArticle),
+        (_, hasMore) => hasMore
+      )
+      .filter(hasMore => hasMore)
       .takeUntil(this.destroyService)
-      .subscribe(news => {
-        this.news = news
+      .subscribe(() => {
+        this.store.dispatch(new FetchMoreArticlesAction())
       })
   }
-
-  private fetchMoreNews() {}
 }

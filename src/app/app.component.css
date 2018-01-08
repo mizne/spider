@@ -11,3 +11,8 @@
 .article-item {
   padding: 5px 10px;
 }
+
+.no-data {
+  text-align: center;
+  padding: 15px;
+}
