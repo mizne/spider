@@ -24,7 +24,6 @@ export class ArticleService {
           count: '1'
         }
       })
-      .delay(2e3)
       .map(data => data as FetchArticlesResp)
       .map(data => {
         return {
