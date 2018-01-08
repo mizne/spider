@@ -7,3 +7,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.article-item {
+  padding: 5px 10px;
+}

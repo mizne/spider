@@ -25,6 +25,7 @@
     "core-js": "^2.4.1",
     "moment": "^2.20.1",
     "ng-zorro-antd": "^0.6.10",
+    "ngx-infinite-scroll": "^0.8.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
