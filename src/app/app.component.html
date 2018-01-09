@@ -19,4 +19,4 @@
   <app-loading></app-loading>
 </div>
 
-<p *ngIf="!(hasMoreArticle$ | async)" class="no-data">我也是有底线的。</p>
+<p *ngIf="showEnd$ | async" class="no-data">我也是有底线的。</p>

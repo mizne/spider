@@ -27,7 +27,7 @@ import {
 })
 export class AppComponent implements OnInit {
   news$: Observable<Article[]>
-  hasMoreArticle$: Observable<boolean>
+  showEnd$: Observable<boolean>
   loading$: Observable<boolean>
 
   toFetchMoreSub: Subject<void> = new Subject<void>()
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
   private initDataSource() {
     this.news$ = this.store.select(getArticles)
-    this.hasMoreArticle$ = this.store.select(hasMoreArticle).skip(1).startWith(true)
+    this.showEnd$ = this.store.select(hasMoreArticle).skip(1).startWith(true).map(e => !e).do(e => console.log(e))
     this.loading$ = this.store.select(getFetchMoreLoading)
   }
 
