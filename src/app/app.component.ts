@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
   private initDataSource() {
     this.news$ = this.store.select(getArticles)
-    this.hasMoreArticle$ = this.store.select(hasMoreArticle)
+    this.hasMoreArticle$ = this.store.select(hasMoreArticle).skip(1).startWith(true)
     this.loading$ = this.store.select(getFetchMoreLoading)
   }
 
