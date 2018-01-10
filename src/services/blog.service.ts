@@ -2,29 +2,30 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 import {
-  FetchArticleParams,
-  Article,
-  FetchArticlesResp
-} from '../models/article.model'
+  FetchBlogParams,
+  Blog,
+  FetchBlogsResp
+} from '../models/blog.model'
 
 @Injectable()
-export class ArticleService {
-  private url = 'Article'
+export class BlogService {
+  private static ORDER_FIELD = '-releaseAt'
+  private static URL = 'Blog'
   constructor(private http: HttpClient) {}
 
-  fetchArticles(
-    params: FetchArticleParams = { skip: 0, limit: 10 }
-  ): Observable<FetchArticlesResp> {
+  fetchBlogs(
+    params: FetchBlogParams = { skip: 0, limit: 10 }
+  ): Observable<FetchBlogsResp> {
     return this.http
-      .get(this.url, {
+      .get(BlogService.URL, {
         params: {
-          order: '-createdAt',
+          order: BlogService.ORDER_FIELD,
           limit: String(params.limit),
           skip: String(params.skip),
           count: '1'
         }
       })
-      .map(data => data as FetchArticlesResp)
+      .map(data => data as FetchBlogsResp)
       .map(data => {
         return {
           count: data.count,
@@ -40,6 +41,4 @@ export class ArticleService {
         }
       })
   }
-
-  fetchArticlesCount() {}
 }

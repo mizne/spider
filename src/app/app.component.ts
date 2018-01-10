@@ -10,13 +10,13 @@ import {
   hasMoreArticle,
   getFetchMoreLoading,
 } from './reducers'
-import { ArticleService } from '../services/article.service'
+import { BlogService } from '../services/blog.service'
 import { DestroyService } from '../services/destroy.service'
-import { Article } from '../models/article.model'
+import { Blog } from '../models/blog.model'
 
 import {
-  FetchArticlesAction,
-  FetchMoreArticlesAction
+  FetchBlogsAction,
+  FetchMoreBlogsAction
 } from './actions/app.action'
 
 @Component({
@@ -26,13 +26,13 @@ import {
   providers: [DestroyService]
 })
 export class AppComponent implements OnInit {
-  news$: Observable<Article[]>
+  news$: Observable<Blog[]>
   showEnd$: Observable<boolean>
   loading$: Observable<boolean>
 
   toFetchMoreSub: Subject<void> = new Subject<void>()
   constructor(
-    private newsService: ArticleService,
+    private newsService: BlogService,
     private destroyService: DestroyService,
     private store: Store<State>
   ) {}
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   private initDispatch() {
-    this.store.dispatch(new FetchArticlesAction())
+    this.store.dispatch(new FetchBlogsAction())
   }
 
   private initSubscriber() {
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
       .filter(hasMore => hasMore)
       .takeUntil(this.destroyService)
       .subscribe(() => {
-        this.store.dispatch(new FetchMoreArticlesAction())
+        this.store.dispatch(new FetchMoreBlogsAction())
       })
   }
 }

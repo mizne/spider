@@ -1,12 +1,12 @@
 import * as fromApp from '../actions/app.action'
-import { Article } from '../../models/article.model'
+import { Blog } from '../../models/blog.model'
 import { uniqWith, prop, eqBy } from 'ramda'
 
 const eqByUrl = eqBy(prop('url'))
 const uniqWithUrl = uniqWith(eqByUrl)
 
 export interface State {
-  articles: Article[]
+  articles: Blog[]
   articleTotalCount: number
 
   fetchMoreLoading: boolean
@@ -24,27 +24,27 @@ export function reducer(
   action: fromApp.Actions
 ): State {
   switch (action.type) {
-    case fromApp.FETCH_ARTICLES_SUCCESS:
+    case fromApp.FETCH_BLOGS_SUCCESS:
       return {
         ...state,
         articles: action.payload.results,
         articleTotalCount: action.payload.count
       }
-    case fromApp.FETCH_MORE_ARTICLES:
+    case fromApp.FETCH_MORE_BLOGS:
       return {
         ...state,
         fetchMoreLoading: true
       }
-    case fromApp.FETCH_MORE_ARTICLES_SUCCESS:
+    case fromApp.FETCH_MORE_BLOGS_SUCCESS:
       return {
         ...state,
         articles: uniqWithUrl(
           state.articles.concat(action.payload.results)
-        ) as Article[],
+        ) as Blog[],
         articleTotalCount: action.payload.count,
         fetchMoreLoading: false
       }
-    case fromApp.FETCH_MORE_ARTICLES_FAILURE:
+    case fromApp.FETCH_MORE_BLOGS_FAILURE:
       return {
         ...state,
         fetchMoreLoading: false

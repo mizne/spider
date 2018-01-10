@@ -1,41 +1,41 @@
 import { Action } from '@ngrx/store'
 
-import { Article, FetchArticlesResp } from '../../models/article.model'
+import { Blog, FetchBlogsResp } from '../../models/blog.model'
 
-export const FETCH_ARTICLES = '[App] Fetch Articles'
-export const FETCH_ARTICLES_SUCCESS = '[App] Fetch Articles Success'
-export const FETCH_ARTICLES_FAILURE = '[App] Fetch Articles Failure'
+export const FETCH_BLOGS = '[App] Fetch Blogs'
+export const FETCH_BLOGS_SUCCESS = '[App] Fetch Blogs Success'
+export const FETCH_BLOGS_FAILURE = '[App] Fetch Blogs Failure'
 
-export const FETCH_MORE_ARTICLES = '[App] Fetch More Aticles'
-export const FETCH_MORE_ARTICLES_SUCCESS = '[App] Fetch More Articles Success'
-export const FETCH_MORE_ARTICLES_FAILURE = '[App] Fetch More Articles Failure'
+export const FETCH_MORE_BLOGS = '[App] Fetch More Blogs'
+export const FETCH_MORE_BLOGS_SUCCESS = '[App] Fetch More Blogs Success'
+export const FETCH_MORE_BLOGS_FAILURE = '[App] Fetch More Blogs Failure'
 
-export class FetchArticlesAction implements Action {
-  readonly type = FETCH_ARTICLES
+export class FetchBlogsAction implements Action {
+  readonly type = FETCH_BLOGS
 }
-export class FetchArticlesSuccessAction implements Action {
-  readonly type = FETCH_ARTICLES_SUCCESS
-  constructor(public payload: FetchArticlesResp) {}
+export class FetchBlogsSuccessAction implements Action {
+  readonly type = FETCH_BLOGS_SUCCESS
+  constructor(public payload: FetchBlogsResp) {}
 }
-export class FetchArticlesFailureAction implements Action {
-  readonly type = FETCH_ARTICLES_FAILURE
+export class FetchBlogsFailureAction implements Action {
+  readonly type = FETCH_BLOGS_FAILURE
 }
 
-export class FetchMoreArticlesAction implements Action {
-  readonly type = FETCH_MORE_ARTICLES
+export class FetchMoreBlogsAction implements Action {
+  readonly type = FETCH_MORE_BLOGS
 }
-export class FetchMoreArticlesSuccessAction implements Action {
-  readonly type = FETCH_MORE_ARTICLES_SUCCESS
-  constructor(public payload: FetchArticlesResp) {}
+export class FetchMoreBlogsSuccessAction implements Action {
+  readonly type = FETCH_MORE_BLOGS_SUCCESS
+  constructor(public payload: FetchBlogsResp) {}
 }
-export class FetchMoreArticlesFailureAction implements Action {
-  readonly type = FETCH_MORE_ARTICLES_FAILURE
+export class FetchMoreBlogsFailureAction implements Action {
+  readonly type = FETCH_MORE_BLOGS_FAILURE
 }
 
 export type Actions =
-  | FetchArticlesAction
-  | FetchArticlesSuccessAction
-  | FetchArticlesFailureAction
-  | FetchMoreArticlesAction
-  | FetchMoreArticlesSuccessAction
-  | FetchMoreArticlesFailureAction
+  | FetchBlogsAction
+  | FetchBlogsSuccessAction
+  | FetchBlogsFailureAction
+  | FetchMoreBlogsAction
+  | FetchMoreBlogsSuccessAction
+  | FetchMoreBlogsFailureAction

@@ -9,14 +9,14 @@ import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
-import { ArticleService } from '../services/article.service'
+import { BlogService } from '../services/blog.service'
 import { TokenInterceptor } from '../services/interceptor'
 import { MomentPipe } from '../pipes/moment.pipe'
 
 import { AppComponent } from './app.component'
 import { LoadingComponent } from './components/loading.component'
 import { reducers } from './reducers/index'
-import { ArticleEffects } from './effects/app.effects'
+import { BlogEffects } from './effects/app.effects'
 
 @NgModule({
   declarations: [AppComponent, MomentPipe, LoadingComponent],
@@ -27,13 +27,13 @@ import { ArticleEffects } from './effects/app.effects'
     InfiniteScrollModule,
     NgZorroAntdModule.forRoot(),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ArticleEffects]),
+    EffectsModule.forRoot([BlogEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 42
     })
   ],
   providers: [
-    ArticleService,
+    BlogService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

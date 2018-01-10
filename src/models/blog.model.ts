@@ -1,4 +1,4 @@
-export class Article {
+export class Blog {
   objectId?: string
   title: string
   url: string
@@ -6,15 +6,16 @@ export class Article {
   source: string
   createdAt: string
   updatedAt: string
+  releaseAt: string
 }
 
-export interface FetchArticleParams {
+export interface FetchBlogParams {
   skip: number
   limit: number
 }
 
-export interface FetchArticlesResp {
-  results: Article[]
+export interface FetchBlogsResp {
+  results: Blog[]
   count: number
 }
 

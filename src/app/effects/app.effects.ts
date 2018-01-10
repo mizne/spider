@@ -6,34 +6,34 @@ import { Store } from '@ngrx/store'
 import { State, getSkipAndLimit } from '../reducers'
 
 import * as fromApp from '../actions/app.action'
-import { ArticleService } from '../../services/article.service'
+import { BlogService } from '../../services/blog.service'
 
 @Injectable()
-export class ArticleEffects {
+export class BlogEffects {
   @Effect()
-  fetchArticles$ = this.actions$.ofType(fromApp.FETCH_ARTICLES).switchMap(() =>
-    this.articleService
-      .fetchArticles()
-      .map(payload => new fromApp.FetchArticlesSuccessAction(payload))
-      .catch(err => Observable.of(new fromApp.FetchArticlesFailureAction()))
+  fetchArticles$ = this.actions$.ofType(fromApp.FETCH_BLOGS).switchMap(() =>
+    this.blogService
+      .fetchBlogs()
+      .map(payload => new fromApp.FetchBlogsSuccessAction(payload))
+      .catch(err => Observable.of(new fromApp.FetchBlogsFailureAction()))
   )
 
   @Effect()
   fetchMoreArticles$ = this.actions$
-    .ofType(fromApp.FETCH_MORE_ARTICLES)
+    .ofType(fromApp.FETCH_MORE_BLOGS)
     .withLatestFrom(this.store.select(getSkipAndLimit), (_, params) => params)
     .switchMap(params => {
-      return this.articleService
-        .fetchArticles(params)
-        .map(payload => new fromApp.FetchMoreArticlesSuccessAction(payload))
+      return this.blogService
+        .fetchBlogs(params)
+        .map(payload => new fromApp.FetchMoreBlogsSuccessAction(payload))
         .catch(err =>
-          Observable.of(new fromApp.FetchMoreArticlesFailureAction())
+          Observable.of(new fromApp.FetchMoreBlogsFailureAction())
         )
     })
 
   constructor(
     private actions$: Actions,
-    private articleService: ArticleService,
+    private blogService: BlogService,
     private store: Store<State>
   ) {}
 }
