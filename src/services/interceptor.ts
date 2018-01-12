@@ -9,12 +9,12 @@ import {
 } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 
-const APP_ID = 'n2WB91RtFeJWLLDJA6KPdXSe-gzGzoHsz'
-const APP_KEY = 'oIIWpUWlszGyQ8lI2sJOIThe'
+const APP_ID = 'WkWMWlkKSkJEYawE2Tozvdax-gzGzoHsz'
+const APP_KEY = 'B1v8Wfhh5TfcSXrCfbvo9qFq'
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private url = 'https://n2wb91rt.api.lncld.net/1.1/classes/'
+  private url = 'https://wkwmwlkk.api.lncld.net/1.1/classes/'
 
   intercept(
     req: HttpRequest<any>,
